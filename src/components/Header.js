@@ -2,37 +2,40 @@ import React, {useState} from 'react'
 import styled from "styled-components"
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { selectCars } from '../features/car/carSlice';
+import { useSelector } from 'react-redux';
 
 function Header() {
     const [burgerStatus, setBurgerStatus] = useState(false);
+    const cars = useSelector(selectCars)
+
     return (
         <Container>
             <a>
                 <img src="/images/logo.svg" alt="" />
             </a>
             <Menu>
-                <a href="#">Model S</a>
-                <a href="#">Model 3</a>
-                <a href="#">Model X</a>
-                <a href="#">Model Y</a>
+                {cars && cars.map((car, index)=>
+                    <a key={index} href="#">{car}</a>
+                )}
             </Menu>
             <RightMenu>
                 <a href="#">Shop</a>
-                <a href="#">Tesla Account</a>
+                <a href="#">Account</a>
                 <CustomMenu onClick={()=>setBurgerStatus(true)}/>
             </RightMenu>
             <BurgerNav show={burgerStatus}>
                 <CloseWrapper>
                     <CustomClose onClick={()=>setBurgerStatus(false)} />
                 </CloseWrapper>
+                {cars && cars.map((car, index)=>
+                    <li key={index}><a href="#">{car}</a></li>
+                )}
                 <li><a href="#">Existing Inventory</a></li>
                 <li><a href="#">Used Inventory</a></li>
                 <li><a href="#">Trade-in</a></li>
                 <li><a href="#">Cybertruck</a></li>
                 <li><a href="#">Roadaster</a></li>
-                <li><a href="#">Semi</a></li>
-                <li><a href="#">Existing Inventory</a></li>
-                <li><a href="#">Existing Inventory</a></li>
             </BurgerNav>
         </Container>
     )
@@ -60,12 +63,13 @@ const Menu = styled.div`
     justify-content: center;
     flex:1;
     a{
-        font-weight: 600;
-        text-transform: uppercase;
-        padding: 0 10px;
+        font-weight: 400;
+        padding: 5px 15px;
         flex-wrap: nowrap;
     }
-
+    a:hover{
+        background-color: hsla(0,0%,0%,.05);
+    }
     @media(max-width: 768px){
         display: none;
     }
@@ -75,9 +79,11 @@ const RightMenu = styled.div`
     display: flex;
     align-items: center;
     a{
-        font-weight: 600;
-        text-transform: uppercase;
+        font-weight: 400;
         margin-right: 10px;
+    }
+    a:hover{
+        background-color: hsla(0,0%,0%,.05);
     }
 `
 
@@ -99,6 +105,7 @@ const BurgerNav = styled.div`
     flex-direction: column;
     text-align: start;
     transform: ${props => props.show ? 'translateX(0)': 'translateX(100%)'};
+    transition: transform 0.2s; 
     li{
         padding: 15px 0;
         border-bottom: 1px solid rgba(0, 0, 0, .2);
