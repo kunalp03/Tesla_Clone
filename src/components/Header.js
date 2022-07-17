@@ -70,7 +70,7 @@ const Menu = styled.div`
     a:hover{
         background-color: hsla(0,0%,0%,.05);
     }
-    @media(max-width: 768px){
+    @media(max-width: 875px){
         display: none;
     }
 `
