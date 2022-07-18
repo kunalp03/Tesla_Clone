@@ -11,17 +11,17 @@ function Header() {
 
     return (
         <Container>
-            <a href="#/">
+            <a>
                 <img src="/images/logo.svg" alt="" />
             </a>
             <Menu>
                 {cars && cars.map((car, index)=>
-                    <a key={index} href="#/">{car}</a>
+                    <a key={index} href="#">{car}</a>
                 )}
             </Menu>
             <RightMenu>
-                <a href="#/">Shop</a>
-                <a href="#/">Account</a>
+                <a href="#">Shop</a>
+                <a href="#">Account</a>
                 <CustomMenu onClick={()=>setBurgerStatus(true)}/>
             </RightMenu>
             <BurgerNav show={burgerStatus}>
@@ -29,13 +29,13 @@ function Header() {
                     <CustomClose onClick={()=>setBurgerStatus(false)} />
                 </CloseWrapper>
                 {cars && cars.map((car, index)=>
-                    <li key={index}><a href="#/">{car}</a></li>
+                    <li key={index}><a href="#">{car}</a></li>
                 )}
-                <li><a href="#/">Existing Inventory</a></li>
-                <li><a href="#/">Used Inventory</a></li>
-                <li><a href="#/">Trade-in</a></li>
-                <li><a href="#/">Cybertruck</a></li>
-                <li><a href="#/">Roadaster</a></li>
+                <li><a href="#">Existing Inventory</a></li>
+                <li><a href="#">Used Inventory</a></li>
+                <li><a href="#">Trade-in</a></li>
+                <li><a href="#">Cybertruck</a></li>
+                <li><a href="#">Roadaster</a></li>
             </BurgerNav>
         </Container>
     )
@@ -54,7 +54,6 @@ const Container = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    
 `
 
 const Menu = styled.div`
@@ -70,7 +69,7 @@ const Menu = styled.div`
     a:hover{
         background-color: hsla(0,0%,0%,.05);
     }
-    @media(max-width: 875px){
+    @media(max-width: 768px){
         display: none;
     }
 `
